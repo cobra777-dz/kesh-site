@@ -95,6 +95,25 @@
   .join-msg.err{color:#ff8a9c}
   .join.done .join-form{display:none}
   .join.done .join-sub{display:none}
+  .join-count{font-size:clamp(.72rem,1.6vw,.85rem);color:#cdd5e2;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  .join-count #wlcount{color:var(--gold-hot);font-weight:800;font-variant-numeric:tabular-nums}
+  .join-count .lim{color:#ffd98a;font-weight:700;white-space:nowrap}
+
+  /* Partage (bas-gauche) */
+  .share{position:fixed;left:calc(14px + env(safe-area-inset-left));bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;
+    display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;
+    background:rgba(7,11,20,.55);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+  .share-lbl{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#aeb6c6;padding-left:2px}
+  .sbtn{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#e9eef7;cursor:pointer;text-decoration:none;padding:0;
+    transition:transform .12s ease,background .2s,color .2s,border-color .2s}
+  .sbtn:hover{transform:translateY(-2px);background:rgba(245,181,60,.18);color:#ffe7a6;border-color:rgba(245,181,60,.5)}
+  .sbtn svg{width:17px;height:17px;fill:currentColor;display:block}
+  .toast{position:fixed;left:calc(14px + env(safe-area-inset-left));bottom:calc(64px + env(safe-area-inset-bottom));z-index:6;
+    padding:.5rem .8rem;border-radius:10px;background:rgba(7,11,20,.92);border:1px solid rgba(245,181,60,.45);color:#ffe7a6;
+    font-size:.8rem;max-width:min(78vw,320px);opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .25s,transform .25s}
+  .toast.show{opacity:1;transform:none}
+  @media (max-width:430px){.share-lbl{display:none}.share{gap:5px;padding:6px 8px}.sbtn{width:32px;height:32px}}
 
   .foot{margin-top:.5rem}
   .foot .site{font-size:clamp(.66rem,1.5vw,.78rem);letter-spacing:.26em;text-transform:uppercase;color:#aeb6c6;text-shadow:0 1px 10px rgba(0,0,0,.75)}
@@ -147,6 +166,7 @@
 
       <section class="join" aria-label="Rejoindre la beta en avant-première">
         <p class="join-label">Rejoignez le mouvement</p>
+        <p class="join-count">⚡ Déjà <span id="wlcount">1&nbsp;240</span> dans le mouvement <span class="lim">· Places limitées</span></p>
         <p class="join-sub">La beta, en avant-première — avant tout le monde.</p>
         <form class="join-form" id="wlform" novalidate>
           <input class="join-input" id="wlemail" type="email" name="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="Votre email" aria-label="Votre email" required>
@@ -158,6 +178,16 @@
       <div class="foot"><span class="site">keshentreprise.com</span></div>
     </div>
   </div>
+
+  <nav class="share" aria-label="Partager KESH">
+    <span class="share-lbl">Partager</span>
+    <a class="sbtn" id="sh-wa" href="#" target="_blank" rel="noopener" aria-label="Partager sur WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.3.4.7 2.6-2.7-.7-.4.2A8.2 8.2 0 1 1 12 3.8zm-3.1 3.7c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.3s1 2.7 1.2 2.9c.1.2 2 3 4.7 4.1 2.3 1 2.8.8 3.3.8s1.6-.7 1.9-1.3c.2-.7.2-1.2.1-1.3l-.5-.3-1.9-.9c-.2-.1-.4-.2-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-2-1.2 7.3 7.3 0 0 1-1.3-1.7c-.2-.3 0-.4.1-.6l.4-.4.3-.5v-.5l-.9-2.1c-.2-.5-.4-.4-.6-.4z"/></svg></a>
+    <button class="sbtn" id="sh-ig" type="button" aria-label="Partager sur Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2 0 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2 0-1.8-.2-2.2-.4a3.7 3.7 0 0 1-1.4-.9 3.7 3.7 0 0 1-.9-1.4c-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c0-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1 0-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1C2.6 8.5 2.6 8.9 2.6 12s0 3.5.1 4.7c0 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1 0 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-1.1-.2-1.7-.4-2.1a3.4 3.4 0 0 0-.8-1.3 3.4 3.4 0 0 0-1.3-.8c-.4-.2-1-.3-2.1-.4C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2zm5.1-3.3a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg></button>
+    <a class="sbtn" id="sh-x" href="#" target="_blank" rel="noopener" aria-label="Partager sur X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7.1 8.1L23.3 22h-6.6l-5.1-6.7L5.7 22H2.6l7.6-8.7L1.9 2h6.7l4.6 6.1L18.9 2zm-1.1 18h1.7L7.3 3.7H5.4L17.8 20z"/></svg></a>
+    <a class="sbtn" id="sh-fb" href="#" target="_blank" rel="noopener" aria-label="Partager sur Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.8 3.7-3.8 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
+    <button class="sbtn" id="sh-cp" type="button" aria-label="Copier le lien"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg></button>
+  </nav>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <div class="grain" aria-hidden="true"></div>
 
@@ -188,11 +218,25 @@
       vid.addEventListener("canplay", kick); kick();
     }
 
+    var SB_URL = "https://npjwpvszpxgwhpcfxefd.supabase.co";
+    var SB_KEY = "sb_publishable_N6B3tphdHEzWkWIS2cQVFw_fpT9Lupr";
+
+    /* ————— Compteur waitlist : base de départ + vrais inscrits. La RPC ne renvoie QUE le total
+       (jamais les emails). Fallback = la base seule si le réseau échoue. ————— */
+    var BASE_COUNT = 1240;
+    var countEl = document.getElementById("wlcount");
+    var live = BASE_COUNT;
+    function fmtN(n){ try { return n.toLocaleString("fr-FR"); } catch(e){ return String(n); } }
+    function setCount(n){ if (countEl) countEl.textContent = fmtN(n); }
+    setCount(BASE_COUNT);
+    fetch(SB_URL + "/rest/v1/rpc/teaser_waitlist_count", { method:"POST", headers:{ "apikey":SB_KEY, "Authorization":"Bearer "+SB_KEY, "Content-Type":"application/json" }, body:"{}" })
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(real){ if (typeof real === "number" && real >= 0){ live = BASE_COUNT + real; setCount(live); } })
+      .catch(function(){});
+
     /* ————— Waitlist beta → Supabase (insertion anonyme, table teaser_waitlist, RLS insert-only) ————— */
     var form = document.getElementById("wlform");
     if (form){
-      var SB_URL = "https://npjwpvszpxgwhpcfxefd.supabase.co";
-      var SB_KEY = "sb_publishable_N6B3tphdHEzWkWIS2cQVFw_fpT9Lupr";
       var input = document.getElementById("wlemail"), btn = document.getElementById("wlbtn"),
           msg = document.getElementById("wlmsg"), join = document.querySelector(".join");
       var sent = false, reEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -219,6 +263,7 @@
         }).then(function(r){
           if (r.ok || r.status === 409){
             sent = true; join.classList.add("done");
+            live++; setCount(live);
             say("⚡ Vous êtes dans le mouvement. On revient vers vous.", "ok");
           } else {
             btn.disabled = false; say("Oups — réessayez dans un instant.", "err");
@@ -228,6 +273,19 @@
         });
       });
     }
+
+    /* ————— Partage (bas-gauche) : WhatsApp / Instagram / X / Facebook / copier le lien ————— */
+    var SHARE_URL = "https://keshentreprise.com";
+    var SHARE_TXT = "KESH — Une identité. Tout un monde. Née à Alger. ⚡ Rejoins le mouvement avant tout le monde 👉";
+    var toastEl = document.getElementById("toast"), toastH = null;
+    function toast(m){ if (!toastEl) return; toastEl.textContent = m; toastEl.classList.add("show"); if (toastH) clearTimeout(toastH); toastH = setTimeout(function(){ toastEl.classList.remove("show"); }, 2600); }
+    function legacyCopy(){ try { var i = document.createElement("input"); i.value = SHARE_URL; i.style.position = "fixed"; i.style.opacity = "0"; document.body.appendChild(i); i.select(); document.execCommand("copy"); document.body.removeChild(i); } catch(e){} }
+    function copyLink(m){ if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(SHARE_URL).then(function(){ toast(m); }, function(){ legacyCopy(); toast(m); }); } else { legacyCopy(); toast(m); } }
+    var wa = document.getElementById("sh-wa"); if (wa) wa.href = "https://wa.me/?text=" + encodeURIComponent(SHARE_TXT + " " + SHARE_URL);
+    var xg = document.getElementById("sh-x"); if (xg) xg.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(SHARE_TXT) + "&url=" + encodeURIComponent(SHARE_URL);
+    var fb = document.getElementById("sh-fb"); if (fb) fb.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(SHARE_URL);
+    var ig = document.getElementById("sh-ig"); if (ig) ig.addEventListener("click", function(){ if (navigator.share){ navigator.share({ title:"KESH", text:SHARE_TXT, url:SHARE_URL }).catch(function(){}); } else { copyLink("Lien copié — colle-le dans ta story Insta ✨"); } });
+    var cp = document.getElementById("sh-cp"); if (cp) cp.addEventListener("click", function(){ copyLink("Lien copié ✅"); });
   })();
   </script>
 </body>
