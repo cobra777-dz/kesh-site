@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KESH Entreprise — Une identité. Tout un monde.</title>
+<meta name="description" content="KESH Entreprise — la première maison algérienne propulsée par l'IA. Une identité. Tout un monde. Lancement : 1er novembre 2026.">
+<meta property="og:title" content="KESH Entreprise — Une identité. Tout un monde.">
+<meta property="og:description" content="La première maison algérienne propulsée par l'IA. Lancement : 1er novembre 2026.">
+<meta name="theme-color" content="#070b14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#070b14; --text:#fff; --body:#c7d0db; --cyan:#27d3ee; --gold:#c6a14f; --gold-hot:#ffe7a6;
+    --gold-grad:linear-gradient(180deg,#fff6cc 0%,#f5b53c 55%,#c6871a 100%);
+    --chrome:linear-gradient(180deg,#ffffff 0%,#dfe6f2 42%,#aab6cb 70%,#e9eef7 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:"Manrope",ui-sans-serif,system-ui,sans-serif;color:var(--body);background:var(--navy);overflow:hidden}
+
+  .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .flash{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:0;background:radial-gradient(70% 55% at 52% 34%, rgba(255,231,166,.8), rgba(39,211,238,.12) 46%, transparent 72%);}
+
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    padding:clamp(2.4rem,6vw,4rem) 1.25rem;background:url("assets/baie-alger.jpg") center 42%/cover no-repeat, var(--navy)}
+  .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;z-index:0;animation:slowzoom 28s ease-in-out infinite alternate}
+  .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(7,11,20,.82) 0%, rgba(7,11,20,.42) 42%, rgba(7,11,20,.5) 70%, rgba(7,11,20,.9) 100%),radial-gradient(120% 85% at 50% 40%, transparent 42%, rgba(7,11,20,.5) 100%)}
+  .content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(1.1rem,2.6vw,1.7rem);width:100%}
+
+  .signature{font-size:clamp(.6rem,1.5vw,.72rem);letter-spacing:.36em;text-transform:uppercase;color:var(--cyan);padding-left:.36em;font-weight:600;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+  .stage{display:flex;flex-direction:column;align-items:center;gap:clamp(.45rem,1.4vw,.75rem)}
+  .wordmark{display:inline-flex;align-items:baseline;justify-content:center;font-family:"Fraunces",Georgia,serif;font-weight:700;line-height:.9;font-size:clamp(3.8rem,18vw,10rem);letter-spacing:.02em}
+  .wordmark span{background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 14px rgba(0,0,0,.7))}
+  .wordmark .s-gold{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 20px rgba(245,181,60,.6))}
+  .lockrule{width:clamp(220px,44vw,520px);height:1px;background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);margin-top:.25rem}
+  .lockword{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(.78rem,2vw,1.05rem);letter-spacing:.52em;text-transform:uppercase;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-left:.52em}
+  .tagline{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.5rem,5vw,2.9rem);color:#fff;text-wrap:balance;line-height:1.08;text-shadow:0 2px 24px rgba(0,0,0,.7);max-width:16ch}
+  .tagline .dot{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .subtag{font-family:"Fraunces",serif;font-style:italic;font-weight:400;font-size:clamp(.95rem,2.4vw,1.25rem);color:#dfe4ee;text-wrap:balance;max-width:26ch;text-shadow:0 1px 16px rgba(0,0,0,.7)}
+
+  .countdown{display:flex;flex-direction:column;align-items:center;gap:clamp(.7rem,1.8vw,1rem);margin-top:.4rem}
+  .cd-label{font-size:clamp(.6rem,1.4vw,.72rem);letter-spacing:.3em;text-transform:uppercase;color:var(--gold-hot);padding-left:.3em;font-weight:600;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+  .cd-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(.5rem,2.4vw,1rem)}
+  .cd-cell{display:flex;flex-direction:column;align-items:center;gap:.4rem;min-width:clamp(60px,15vw,94px);padding:clamp(.6rem,1.6vw,.85rem) clamp(.5rem,1.5vw,.85rem);border:1px solid rgba(255,255,255,.14);border-radius:13px;background:rgba(7,11,20,.5);backdrop-filter:blur(6px)}
+  .num{font-family:"Fraunces",serif;font-size:clamp(1.8rem,6.5vw,3rem);font-weight:700;line-height:1;font-variant-numeric:tabular-nums;color:#fff}
+  .unit{font-size:clamp(.52rem,1.3vw,.62rem);letter-spacing:.2em;text-transform:uppercase;color:#aeb6c6}
+
+  .foot{margin-top:.6rem;display:flex;flex-direction:column;gap:.5rem;align-items:center}
+  .foot .site{font-size:clamp(.66rem,1.5vw,.78rem);letter-spacing:.26em;text-transform:uppercase;color:#aeb6c6;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+
+  .striking .flash{animation:flashHit .6s ease-out}
+  .striking .s-gold{animation:sGlow .65s ease-out}
+  @keyframes flashHit{0%{opacity:0}7%{opacity:.5}18%{opacity:.08}28%{opacity:.4}55%{opacity:.05}100%{opacity:0}}
+  @keyframes sGlow{0%{filter:drop-shadow(0 0 20px rgba(245,181,60,.6))}16%{filter:drop-shadow(0 0 52px rgba(255,231,166,1))}100%{filter:drop-shadow(0 0 20px rgba(245,181,60,.6))}}
+  @keyframes slowzoom{0%{transform:scale(1)}100%{transform:scale(1.08)}}
+  @media (prefers-reduced-motion:reduce){.hero-bg,.flash{animation:none!important;opacity:0}.hero-bg{display:none}.s-gold{filter:drop-shadow(0 0 26px rgba(245,181,60,.8))!important}}
+</style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="flash" aria-hidden="true"></div>
+
+  <header class="hero" id="hero">
+    <video class="hero-bg" autoplay loop muted playsinline poster="assets/baie-alger.jpg" aria-hidden="true"><source src="assets/baie-alger.mp4" type="video/mp4"></video>
+    <div class="hero-scrim" aria-hidden="true"></div>
+
+    <div class="content">
+      <p class="signature">Organize. Analyze. Perform.</p>
+      <div class="stage">
+        <h1 class="wordmark" aria-label="KESH"><span>K</span><span>E</span><span class="s-gold">S</span><span>H</span></h1>
+        <div class="lockrule"></div>
+        <div class="lockword">Kesh Entreprise</div>
+      </div>
+      <h2 class="tagline">Une identité<span class="dot">.</span> Tout un monde<span class="dot">.</span></h2>
+      <p class="subtag">La première maison algérienne propulsée par l'IA.</p>
+
+      <section class="countdown" aria-label="Compte à rebours avant le lancement">
+        <p class="cd-label">Lancement officiel — 1ᵉʳ novembre 2026</p>
+        <div class="cd-grid">
+          <div class="cd-cell"><span class="num" id="dd">00</span><span class="unit">Jours</span></div>
+          <div class="cd-cell"><span class="num" id="hh">00</span><span class="unit">Heures</span></div>
+          <div class="cd-cell"><span class="num" id="mm">00</span><span class="unit">Minutes</span></div>
+          <div class="cd-cell"><span class="num" id="ss">00</span><span class="unit">Secondes</span></div>
+        </div>
+      </section>
+
+      <div class="foot"><span class="site">keshentreprise.com</span></div>
+    </div>
+  </header>
+
+  <script>
+    const target = new Date("2026-11-01T00:00:00+01:00").getTime();
+    const pad = (n) => String(n).padStart(2, "0");
+    const el = { dd:document.getElementById("dd"), hh:document.getElementById("hh"), mm:document.getElementById("mm"), ss:document.getElementById("ss") };
+    function tick(){
+      const diff = target - Date.now();
+      if (diff <= 0){ el.dd.textContent=el.hh.textContent=el.mm.textContent=el.ss.textContent="00"; clearInterval(timer); return; }
+      const s = Math.floor(diff/1000);
+      el.dd.textContent = pad(Math.floor(s/86400)); el.hh.textContent = pad(Math.floor((s%86400)/3600));
+      el.mm.textContent = pad(Math.floor((s%3600)/60)); el.ss.textContent = pad(s%60);
+    }
+    tick(); const timer = setInterval(tick, 1000);
+
+    const hero = document.getElementById("hero");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function strike(){ hero.classList.remove("striking"); void hero.offsetWidth; hero.classList.add("striking"); }
+    function schedule(){ const delay = 2600 + Math.random()*3600; setTimeout(()=>{ strike(); schedule(); }, delay); }
+    if(!reduce){ setTimeout(strike, 900); schedule(); }
+  </script>
+</body>
+</html>
