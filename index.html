@@ -221,17 +221,20 @@
     var SB_URL = "https://npjwpvszpxgwhpcfxefd.supabase.co";
     var SB_KEY = "sb_publishable_N6B3tphdHEzWkWIS2cQVFw_fpT9Lupr";
 
-    /* ————— Compteur waitlist : base de départ + vrais inscrits. La RPC ne renvoie QUE le total
-       (jamais les emails). Fallback = la base seule si le réseau échoue. ————— */
-    var BASE_COUNT = 1240;
+    /* ————— Compteur waitlist : base semée + croissance douce dans le temps + vrais inscrits.
+       (BASE/rythme réglables ci-dessous ; la RPC ne renvoie QUE le total, jamais les emails) ————— */
+    var BASE_COUNT = 1240;                    // base de départ
+    var GROW_START = Date.UTC(2026, 6, 20);   // 20 juil. 2026 (mois 0-indexé) — point de départ de la croissance
+    var GROW_PER_DAY = 18;                     // inscriptions "organiques" ajoutées par jour
+    var realCount = 0;
     var countEl = document.getElementById("wlcount");
-    var live = BASE_COUNT;
     function fmtN(n){ try { return n.toLocaleString("fr-FR"); } catch(e){ return String(n); } }
-    function setCount(n){ if (countEl) countEl.textContent = fmtN(n); }
-    setCount(BASE_COUNT);
+    function seededCount(){ return BASE_COUNT + Math.floor(Math.max(0, (Date.now() - GROW_START) / 86400000) * GROW_PER_DAY); }
+    function render(){ if (countEl) countEl.textContent = fmtN(seededCount() + realCount); }
+    render();
     fetch(SB_URL + "/rest/v1/rpc/teaser_waitlist_count", { method:"POST", headers:{ "apikey":SB_KEY, "Authorization":"Bearer "+SB_KEY, "Content-Type":"application/json" }, body:"{}" })
       .then(function(r){ return r.ok ? r.json() : null; })
-      .then(function(real){ if (typeof real === "number" && real >= 0){ live = BASE_COUNT + real; setCount(live); } })
+      .then(function(n){ if (typeof n === "number" && n >= 0){ realCount = n; render(); } })
       .catch(function(){});
 
     /* ————— Waitlist beta → Supabase (insertion anonyme, table teaser_waitlist, RLS insert-only) ————— */
@@ -263,7 +266,7 @@
         }).then(function(r){
           if (r.ok || r.status === 409){
             sent = true; join.classList.add("done");
-            live++; setCount(live);
+            realCount++; render();
             say("⚡ Vous êtes dans le mouvement. On revient vers vous.", "ok");
           } else {
             btn.disabled = false; say("Oups — réessayez dans un instant.", "err");
