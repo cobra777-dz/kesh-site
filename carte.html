@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KESH — Réserve ta carte de Membre Fondateur</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#050506">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --noir:#050506; --rouge:#E11D2E; --rouge-vif:#FF2E3F; --or:#E8C15A; --or-fonce:#B8923B;
+    --blanc:#F5F2EA; --gris:#8A8A93;
+    --anton:"Anton",sans-serif; --cond:"Barlow Condensed",sans-serif; --sans:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--noir);color:var(--blanc);font-family:var(--sans);min-height:100vh;overflow-x:hidden;position:relative;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:440px;margin:0 auto;padding:26px 16px 130px;position:relative;z-index:2}
+  .bolt{color:transparent;background:linear-gradient(180deg,#fff6cc,var(--or) 55%,var(--or-fonce));-webkit-background-clip:text;background-clip:text}
+
+  /* ===== SCÈNE par app (KeshSport défaut → Match/Play/Course/Muscu) ===== */
+  .stadium{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.6;transition:opacity 1s ease;
+    background:radial-gradient(92% 60% at 50% 106%, rgba(225,29,46,.4), transparent 62%),radial-gradient(80% 48% at 50% -6%, rgba(232,193,90,.2), transparent 60%),#08070a}
+  .stadium.on{opacity:1}
+  .stadium[data-app="KeshMatch"]{background:linear-gradient(180deg,rgba(5,5,6,.68),rgba(5,5,6,.4) 42%,rgba(22,3,6,.86)),url("assets/stade-sansiro.jpg") center/cover no-repeat}
+  .stadium[data-app="KeshPlay"]{background:radial-gradient(88% 55% at 50% 104%, rgba(96,128,255,.42), transparent 64%),radial-gradient(70% 48% at 18% 8%, rgba(150,70,255,.32), transparent 60%),#06070f}
+  .stadium[data-app="KeshFooting"]{background:radial-gradient(90% 55% at 50% 104%, rgba(255,150,60,.42), transparent 64%),radial-gradient(70% 48% at 82% 6%, rgba(255,90,60,.28), transparent 60%),#0d0805}
+  .stadium[data-app="KeshGym"]{background:radial-gradient(86% 55% at 50% 104%, rgba(150,172,205,.34), transparent 64%),radial-gradient(80% 48% at 50% -2%, rgba(120,140,170,.22), transparent 60%),#08090c}
+  .stadium.flash{animation:sceneFlash .55s ease}
+  @keyframes sceneFlash{0%{filter:brightness(.55)}45%{filter:brightness(1.9)}100%{filter:brightness(1)}}
+  .smoke{position:absolute;bottom:-8%;width:58%;height:72%;border-radius:50%;filter:blur(30px);mix-blend-mode:screen;opacity:.6;background:radial-gradient(circle at 50% 100%, rgba(225,29,46,.55), transparent 70%);animation:smoke 8s ease-in-out infinite}
+  .smoke.s1{left:-8%}.smoke.s2{right:-8%;animation-delay:2.6s}.smoke.s3{left:30%;width:46%;animation-delay:1.3s;opacity:.45}
+  .stadium[data-app="KeshPlay"] .smoke{background:radial-gradient(circle at 50% 100%, rgba(96,128,255,.5), transparent 68%)}
+  .stadium[data-app="KeshFooting"] .smoke{background:radial-gradient(circle at 50% 100%, rgba(255,150,60,.5), transparent 68%)}
+  .stadium[data-app="KeshGym"] .smoke{background:radial-gradient(circle at 50% 100%, rgba(150,172,205,.4), transparent 68%)}
+  @keyframes smoke{0%,100%{transform:translateY(8%) scale(1);opacity:.4}50%{transform:translateY(-9%) scale(1.16);opacity:.78}}
+
+  .eyebrow{font-family:var(--cond);text-transform:uppercase;letter-spacing:.3em;font-size:.72rem;font-weight:700;color:var(--rouge-vif);text-align:center}
+  h1{font-family:var(--anton);text-transform:uppercase;text-align:center;font-size:clamp(1.9rem,1.3rem + 3vw,2.6rem);line-height:.98;margin:6px 0 4px}
+  .intro-sub{text-align:center;color:var(--gris);font-size:.92rem;max-width:32ch;margin:0 auto 20px}
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:26px}
+  .tile{background:linear-gradient(160deg,#16161B,#0A0A0C);border:1px solid rgba(225,29,46,.22);border-radius:14px;padding:12px 13px;position:relative;overflow:hidden}
+  .tile::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--rouge)}
+  .tile .i{font-size:1.5rem}.tile .n{font-family:var(--cond);font-weight:700;text-transform:uppercase;font-size:1rem;margin:4px 0 2px}
+  .tile .s{color:#b6a894;font-size:.76rem;font-style:italic;line-height:1.3;min-height:2.3em}
+  .tile .soon{margin-top:6px;display:inline-block;font-family:var(--cond);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.54rem;color:var(--or)}
+
+  .hookhead{text-align:center;margin-bottom:14px}
+  .hookhead .k{font-family:var(--cond);text-transform:uppercase;letter-spacing:.22em;font-size:.66rem;color:var(--or);font-weight:700}
+  .hookhead h2{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.5rem,1.1rem + 2vw,2rem);margin-top:3px}
+
+  .stage{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;z-index:2;min-height:300px;justify-content:center}
+  .pack{display:flex;flex-direction:column;align-items:center;gap:20px;animation:packIn .6s ease both}
+  @keyframes packIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  .pack-visual{width:190px;height:276px;border-radius:14px;position:relative;cursor:pointer;background:linear-gradient(160deg,#16161B 0%,#0A0A0C 55%,#1D0508 100%);border:1px solid rgba(225,29,46,.35);box-shadow:0 0 60px rgba(225,29,46,.18), inset 0 0 40px rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+  .pack-visual::before{content:"";position:absolute;inset:0;border-radius:14px;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.06) 45%,transparent 60%);animation:sheenMove 3.2s ease-in-out infinite}
+  .pack-k{font-family:var(--anton);font-size:70px;line-height:1;background:linear-gradient(180deg,var(--rouge-vif),var(--rouge) 55%,#7A0E18);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .pack-label{font-family:var(--cond);font-weight:600;font-size:13px;letter-spacing:.28em;color:var(--gris);text-transform:uppercase;text-align:center;padding:0 8px}
+  .pack-btn{font-family:var(--cond);font-weight:700;font-size:17px;letter-spacing:.09em;text-transform:uppercase;background:var(--rouge);color:#fff;border:none;padding:14px 34px;border-radius:8px;cursor:pointer;box-shadow:0 8px 30px rgba(225,29,46,.4);transition:transform .15s}
+  .pack-btn:hover{transform:scale(1.04)}.pack-btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+
+  /* ===== CINÉMATIQUE WALK-OUT (vidéo Veo) ===== */
+  .cinema{position:fixed;inset:0;z-index:80;background:#000;display:none;align-items:center;justify-content:center}
+  .cinema.on{display:flex}
+  .cinema video{width:100%;height:100%;object-fit:cover}
+  .cinema .skip{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom));right:20px;z-index:2;background:rgba(5,5,6,.6);border:1px solid rgba(245,242,234,.3);color:#fff;font-family:var(--cond);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;padding:9px 16px;border-radius:99px;cursor:pointer}
+
+  .card-scene{display:none;perspective:1100px;animation:cardIn .7s cubic-bezier(.2,1.2,.35,1) both}
+  .card-scene.on{display:block}
+  @keyframes cardIn{from{opacity:0;transform:translateY(60px) scale(.85)}to{opacity:1;transform:none}}
+  .card{width:300px;height:466px;position:relative;margin:0 auto;clip-path:polygon(12% 0, 88% 0, 100% 7%, 100% 84%, 50% 100%, 0 84%, 0 7%);
+    background:linear-gradient(180deg,#17171C 0%, #0B0B0E 48%, #150307 100%);transition:transform .18s ease;will-change:transform;filter:drop-shadow(0 24px 44px rgba(0,0,0,.75));overflow:hidden}
+  .card::before{content:"";position:absolute;inset:0;padding:2px;clip-path:polygon(12% 0, 88% 0, 100% 7%, 100% 84%, 50% 100%, 0 84%, 0 7%);background:linear-gradient(160deg,var(--or) 0%, #6E5620 40%, var(--or) 70%, #FFF3C9 100%);-webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:5}
+  .card.fond::before{background:linear-gradient(160deg,#FFF3C9, var(--rouge) 45%, var(--or) 75%, #FFF3C9)}
+  .cardbg{position:absolute;inset:0;z-index:0;background-image:url("assets/avatars/kesh-foot-h-sansiro-web.jpg");background-size:cover;background-position:center 22%;opacity:0;transition:opacity .5s}
+  .card[data-app="KeshMatch"] .cardbg{opacity:1}
+  .card-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(5,5,6,.35) 0%,transparent 26%,transparent 46%,rgba(5,5,6,.78) 74%,rgba(5,5,6,.92) 100%)}
+  .selfie-inset{position:absolute;top:20px;right:20px;width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--or);z-index:4;display:none;box-shadow:0 4px 14px rgba(0,0,0,.6)}
+  .card.has-selfie .selfie-inset{display:block}
+  .sheen{position:absolute;inset:0;pointer-events:none;clip-path:polygon(12% 0, 88% 0, 100% 7%, 100% 84%, 50% 100%, 0 84%, 0 7%);background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.09) 48%,transparent 62%);animation:sheenMove 4.5s ease-in-out infinite;z-index:4}
+  @keyframes sheenMove{0%,100%{transform:translateX(-70%)}50%{transform:translateX(70%)}}
+
+  .note-block{position:absolute;top:26px;left:22px;text-align:center;z-index:3}
+  .note{font-family:var(--anton);font-size:50px;line-height:.9;background:linear-gradient(180deg,#FFF3C9,var(--or) 55%,var(--or-fonce));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 6px rgba(0,0,0,.7))}
+  .tier{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:.14em;color:var(--or);text-transform:uppercase}
+  .flag{font-size:18px;margin-top:3px}
+  .kesh-mini{position:absolute;top:28px;left:0;right:0;text-align:center;z-index:3;font-family:var(--cond);font-weight:700;letter-spacing:.2em;font-size:.7rem;color:#e6dccb}
+  .soon-badge{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);z-index:3;font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.82rem;color:var(--or);border:1px solid rgba(232,193,90,.5);border-radius:10px;padding:9px 15px;background:rgba(5,5,6,.72);display:none;text-align:center;line-height:1.4}
+  .card[data-teaser="1"] .soon-badge{display:block}
+  .card[data-teaser="1"] .cardbg{opacity:0}
+
+  .card-body{position:absolute;left:0;right:0;bottom:20px;padding:0 26px;text-align:center;z-index:3}
+  .p-name{font-family:var(--anton);font-size:27px;letter-spacing:.03em;text-transform:uppercase;background:linear-gradient(90deg,var(--blanc) 30%, var(--rouge-vif));-webkit-background-clip:text;background-clip:text;color:transparent;min-height:1em;filter:drop-shadow(0 2px 8px rgba(0,0,0,.8))}
+  .p-sub{font-family:var(--cond);font-weight:600;font-size:12px;letter-spacing:.2em;color:#c9d0d8;text-transform:uppercase;margin-top:1px}
+  .divider{width:60%;height:1px;margin:9px auto;background:linear-gradient(90deg,transparent,var(--or),transparent)}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:5px 4px}
+  .stat{display:flex;align-items:baseline;justify-content:center;gap:5px}
+  .stat b{font-family:var(--anton);font-size:13px;color:#e6dccb;font-weight:400}
+  .stat span{font-family:var(--cond);font-weight:600;font-size:11px;letter-spacing:.1em;color:#c9d0d8}
+  .how{margin-top:8px;background:rgba(5,5,6,.5);border:1px solid rgba(232,193,90,.5);color:var(--or);font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:99px;cursor:pointer}
+
+  .panel{width:100%;max-width:360px;margin:22px auto 0;background:linear-gradient(180deg,#121218,#0a0a0d);border:1px solid rgba(225,29,46,.18);border-radius:18px;padding:16px 15px;position:relative;z-index:2}
+  .field{margin-bottom:13px}.field:last-child{margin-bottom:0}
+  label.l{display:block;font-family:var(--cond);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.64rem;color:var(--or);margin-bottom:7px}
+  input[type=text],input[type=email]{width:100%;background:var(--noir);border:1px solid #262029;border-radius:11px;color:#fff;font-family:inherit;font-size:1rem;padding:.7rem .9rem;outline:none}
+  input:focus{border-color:var(--rouge-vif);box-shadow:0 0 0 3px rgba(225,29,46,.18)}
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .chip{display:flex;align-items:center;gap:8px;background:var(--noir);border:1px solid #262029;border-radius:11px;padding:10px 11px;cursor:pointer;font-size:.9rem;-webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s}
+  .chip.on{border-color:var(--rouge-vif);background:linear-gradient(180deg,rgba(225,29,46,.16),rgba(225,29,46,.04))}
+  .selfie{display:flex;align-items:center;gap:11px}
+  .selfie .btn{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;background:var(--noir);border:1px dashed rgba(232,193,90,.5);border-radius:11px;padding:10px 13px;cursor:pointer;color:var(--or);font-family:var(--cond);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.74rem}
+  .selfie input{display:none}.selfie .hint{font-size:.72rem;color:var(--gris)}.selfie .hint b{color:#c8cdd6}
+  .consent{display:flex;gap:9px;align-items:flex-start;font-size:.8rem;color:#c2c7cf}
+  .consent input{margin-top:3px;width:17px;height:17px;flex:none;accent-color:var(--rouge)}.consent a{color:var(--or)}
+  .cta-res{width:100%;margin-top:3px;border:0;border-radius:12px;padding:14px;cursor:pointer;font-family:var(--cond);text-transform:uppercase;letter-spacing:.06em;font-weight:800;font-size:1.02rem;color:#fff;background:linear-gradient(180deg,var(--rouge-vif),#B3121F);box-shadow:0 10px 26px rgba(225,29,46,.34)}
+  .cta-res:disabled{opacity:.5;box-shadow:none;cursor:not-allowed}
+  .msg{min-height:1em;font-size:.8rem;text-align:center;margin-top:8px;color:var(--gris)}.msg.err{color:#ff8a9c}
+  .success{display:none;text-align:center}.success.on{display:block}
+  .success .big{font-family:var(--anton);text-transform:uppercase;font-size:1.4rem;color:transparent;background:linear-gradient(180deg,#fff6cc,var(--or) 55%,var(--or-fonce));-webkit-background-clip:text;background-clip:text;margin-bottom:4px}
+  .success p{color:#c2c7cf;font-size:.88rem;margin-bottom:8px}
+  .fond-hint{font-size:.78rem;color:var(--or);background:rgba(232,193,90,.08);border:1px solid rgba(232,193,90,.3);border-radius:10px;padding:9px 11px;margin-top:10px;line-height:1.4}
+  .share{display:flex;justify-content:center;gap:9px;margin-top:12px;flex-wrap:wrap}
+  .share a,.share button{display:inline-flex;align-items:center;gap:6px;border:1px solid #262029;background:var(--noir);color:var(--blanc);border-radius:11px;padding:9px 13px;font-family:var(--cond);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:.74rem;cursor:pointer;text-decoration:none}
+  .formwrap.hide{display:none}
+
+  .assist{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:40;display:flex;align-items:flex-end;gap:9px;max-width:min(90vw,360px)}
+  .assist-av{flex:none;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #FF6B54, #7A0E18);border:2px solid var(--or);display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 24px rgba(225,29,46,.4)}
+  .assist-av b{font-family:var(--anton);font-size:20px;color:transparent;background:linear-gradient(180deg,#fff6cc,var(--or));-webkit-background-clip:text;background-clip:text}
+  .assist-bulle{background:#14141a;border:1px solid rgba(232,193,90,.35);border-radius:14px 14px 14px 4px;padding:10px 13px;font-size:.84rem;line-height:1.35;box-shadow:0 10px 30px rgba(0,0,0,.5);transition:opacity .3s, transform .3s}
+  .assist-bulle.hide{opacity:0;transform:translateY(8px);pointer-events:none}
+  .assist-bulle .sig{color:var(--or);font-weight:700}.assist-bulle .x{float:right;color:var(--gris);cursor:pointer;margin-left:8px}
+
+  .tuto{position:fixed;inset:0;z-index:90;background:rgba(5,5,6,.92);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+  .tuto.on{display:flex}
+  .tuto-box{max-width:340px;width:100%;text-align:center}
+  .tuto-box h3{font-family:var(--anton);text-transform:uppercase;font-size:1.4rem;margin-bottom:4px}
+  .tuto-box .lead{color:var(--gris);font-size:.86rem;margin-bottom:18px}
+  .tuto-note{font-family:var(--anton);font-size:76px;line-height:1;background:linear-gradient(180deg,#FFF3C9,var(--or) 55%,var(--or-fonce));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tuto-tier{font-family:var(--cond);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:.9rem;margin-top:2px;transition:color .3s}
+  .tuto-track{height:9px;background:#1a1a20;border-radius:99px;margin:16px 0 6px;overflow:hidden}
+  .tuto-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#7A0E18,var(--rouge-vif),var(--or))}
+  .tuto-steps{text-align:left;margin:14px 0;font-size:.82rem;color:#c2c7cf;line-height:1.7}.tuto-steps b{color:var(--or)}
+  .tuto-close{margin-top:8px;background:var(--rouge);color:#fff;border:0;border-radius:10px;padding:11px 22px;font-family:var(--cond);font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+
+  .tag{text-align:center;font-family:var(--cond);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#555;margin-top:22px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition:none !important}}
+</style>
+</head>
+<body>
+<div class="stadium" id="stadium"><div class="smoke s1"></div><div class="smoke s2"></div><div class="smoke s3"></div></div>
+
+<div class="cinema" id="cinema">
+  <video id="walkoutVid" src="assets/avatars/walkout-web.mp4" poster="assets/avatars/walkout-poster.jpg" muted playsinline preload="auto"></video>
+  <button class="skip" id="skipBtn" type="button">Passer ⏭</button>
+</div>
+
+<div class="wrap">
+  <p class="eyebrow">KeshSport arrive</p>
+  <h1>Ta place dans le <span class="bolt">mouvement</span>.</h1>
+  <p class="intro-sub">4 apps, un seul KESH ID. Réserve ta carte de Membre Fondateur avant tout le monde.</p>
+  <div class="tiles">
+    <div class="tile"><div class="i">⚽</div><div class="n">KeshMatch</div><div class="s">« Si tu joues, tu existes. »</div><div class="soon">bientôt en test</div></div>
+    <div class="tile"><div class="i">🎮</div><div class="n">KeshPlay</div><div class="s">« La manette devient une carrière. »</div><div class="soon">bientôt en test</div></div>
+    <div class="tile"><div class="i">🏃</div><div class="n">KeshFooting</div><div class="s">« Chaque foulée laisse une trace. »</div><div class="soon">bientôt en test</div></div>
+    <div class="tile"><div class="i">💪</div><div class="n">KeshGym</div><div class="s">« La barre ne ment jamais. »</div><div class="soon">bientôt en test</div></div>
+  </div>
+
+  <div class="hookhead"><div class="k">KE<span class="bolt">⚡</span>H · Carte Fondateur</div><h2>Réserve ta carte</h2></div>
+
+  <div class="stage">
+    <div class="pack" id="pack">
+      <div class="pack-visual" id="packVisual"><div class="pack-k">K</div><div class="pack-label" id="packLabel">Choisis ton terrain ↓</div></div>
+      <button class="pack-btn" id="packBtn" disabled>Choisis ton terrain ↓</button>
+    </div>
+    <div class="card-scene" id="cardScene">
+      <div class="card" id="card" data-app="KeshMatch" data-teaser="0">
+        <div class="cardbg"></div>
+        <div class="card-scrim"></div>
+        <div class="kesh-mini">KE<span class="bolt">⚡</span>H</div>
+        <div class="note-block"><div class="note">65</div><div class="tier">Bronze</div><div class="flag">🇩🇿</div></div>
+        <img class="selfie-inset" id="selfieInset" alt="">
+        <div class="soon-badge" id="soonBadge">🔒 Carte<br>bientôt</div>
+        <div class="card-body">
+          <div class="p-name" id="pname">TON PSEUDO</div>
+          <div class="p-sub" id="psub">Membre Fondateur · Foot</div>
+          <div class="divider"></div>
+          <div class="stats" id="stats"></div>
+          <button class="how" id="howBtn" type="button">⚡ Comment ma note monte ?</button>
+        </div>
+        <div class="sheen"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="formwrap" id="formwrap">
+      <div class="field"><label class="l" for="pseudo">Ton pseudo</label><input id="pseudo" type="text" maxlength="12" placeholder="ex. Karim, Lina, Riad…" autocomplete="off"></div>
+      <div class="field"><label class="l">Choisis ton terrain</label>
+        <div class="chips" id="chips">
+          <div class="chip" data-app="KeshMatch" data-t="Foot"><span>⚽</span> Foot</div>
+          <div class="chip" data-app="KeshPlay" data-t="Gaming"><span>🎮</span> Gaming</div>
+          <div class="chip" data-app="KeshFooting" data-t="Course"><span>🏃</span> Course</div>
+          <div class="chip" data-app="KeshGym" data-t="Muscu"><span>💪</span> Muscu</div>
+        </div>
+      </div>
+      <div class="field"><label class="l">Ta photo (avatar)</label>
+        <div class="selfie"><label class="btn" for="selfie">📸 Selfie</label><input id="selfie" type="file" accept="image/*"><span class="hint"><b>Reste sur ton téléphone.</b> Jamais envoyée.</span></div>
+      </div>
+      <div class="field"><label class="l" for="email">Ton email — pour réserver</label><input id="email" type="email" inputmode="email" autocomplete="email" placeholder="vous@exemple.com"></div>
+      <div class="field"><label class="consent"><input id="consent" type="checkbox"><span>J'accepte de recevoir l'accès anticipé de KESH. Désinscription à tout moment. <a href="/confidentialite.html">Confidentialité</a>.</span></label></div>
+      <button class="cta-res" id="reserve" disabled>Réserver ma carte →</button>
+      <p class="msg" id="msg"></p>
+    </div>
+    <div class="success" id="successBox">
+      <div class="big">⚡ Tu es Membre Fondateur</div>
+      <p>Ta carte est réservée. On te prévient en avant‑première le 1ᵉʳ novembre.</p>
+      <div class="fond-hint">🏆 <b>Parraine 10 amis</b> → ta carte passe en <b>design Fondateur doré</b> + <b>+10 de note</b> d'un coup, avec l'animation. On te préviendra.</div>
+      <div class="share" id="share"><a id="sh-wa" href="#" target="_blank" rel="noopener">WhatsApp</a><a id="sh-x" href="#" target="_blank" rel="noopener">X</a><button id="sh-cp" type="button">Copier le lien</button></div>
+    </div>
+  </div>
+  <p class="tag">KESH · Carte Fondateur · walk-out Veo · San Siro · démo (aucun envoi réel dans cette page de test)</p>
+</div>
+
+<div class="assist"><div class="assist-av" id="assistAv"><b>⚡</b></div><div class="assist-bulle" id="assistBulle"><span class="x" id="assistX">✕</span><span class="sig">KESH que tu veux ?</span> Choisis ton terrain, je te sors ta carte. 👉</div></div>
+
+<div class="tuto" id="tuto"><div class="tuto-box"><h3>Ta note est vivante</h3><p class="lead">Plus tu joues, plus elle monte. Regarde 👇</p>
+  <div class="tuto-note" id="tNote">65</div><div class="tuto-tier" id="tTier">Bronze</div>
+  <div class="tuto-track"><div class="tuto-fill" id="tFill"></div></div>
+  <div class="tuto-steps">⚽ <b>Tu joues</b> un match noté → +<br>🗳️ <b>Tes adversaires te notent</b> (jamais tes potes) → +<br>📈 <b>Tes stats se débloquent</b> et montent<br>💤 <b>Tu disparais ?</b> Ta note redescend — une carte est une forme, pas un trophée.</div>
+  <button class="tuto-close" id="tClose">J'ai capté ⚡</button></div></div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var APPS={
+    KeshMatch:{terrain:"Foot",full:true,stats:["VIT","TIR","PAS","DRI","DÉF","PHY"]},
+    KeshPlay:{terrain:"Gaming",full:false,stats:["VIS","RÉF","STR","VIT","MEN","CLU"]},
+    KeshFooting:{terrain:"Course",full:false,stats:["END","VIT","ALL","DÉN","RÉC","MEN"]},
+    KeshGym:{terrain:"Muscu",full:false,stats:["FRC","EXP","VOL","END","TEC","MEN"]}
+  };
+  var st={pseudo:"",app:null,revealed:false,selfie:false};
+
+  function drawCard(){
+    var a=st.app?APPS[st.app]:null;
+    $("pname").textContent=st.pseudo.trim()?st.pseudo.toUpperCase():"TON PSEUDO";
+    if(!a){ $("psub").textContent="Membre Fondateur · KeshSport"; $("stats").innerHTML=""; $("card").setAttribute("data-app","KeshSport"); $("card").setAttribute("data-teaser","0"); return; }
+    $("psub").textContent="Membre Fondateur · "+a.terrain;
+    $("stats").innerHTML=a.stats.map(function(s){return '<div class="stat"><b>🔒</b><span>'+s+'</span></div>';}).join("");
+    $("card").setAttribute("data-app",st.app);
+    $("card").setAttribute("data-teaser",a.full?"0":"1");
+    $("soonBadge").innerHTML="🔒 Carte "+st.app.replace("Kesh","")+"<br>bientôt";
+  }
+  function checkPack(){ var ok=st.pseudo.trim().length>=2 && st.app; $("packBtn").disabled=!ok;
+    $("packBtn").textContent=ok?"Ouvrir mon pack ⚡":(st.app?"Ton pseudo ↑":"Choisis ton terrain ↓");
+    $("packLabel").textContent=st.app?("Pack "+APPS[st.app].terrain):"Choisis ton terrain ↓"; }
+
+  $("pseudo").addEventListener("input",function(e){ st.pseudo=e.target.value; drawCard(); checkPack(); checkReserve(); });
+  Array.prototype.forEach.call(document.querySelectorAll("#chips .chip"),function(c){
+    c.addEventListener("click",function(){
+      document.querySelectorAll("#chips .chip").forEach(function(x){x.classList.remove("on");}); c.classList.add("on");
+      st.app=c.getAttribute("data-app");
+      var sd=$("stadium"); sd.classList.add("on"); sd.setAttribute("data-app",st.app);
+      sd.classList.remove("flash"); void sd.offsetWidth; sd.classList.add("flash");
+      drawCard(); checkPack();
+    });
+  });
+  $("selfie").addEventListener("change",function(e){
+    var f=e.target.files&&e.target.files[0]; if(!f)return;
+    var r=new FileReader(); r.onload=function(ev){ $("selfieInset").src=ev.target.result; $("card").classList.add("has-selfie"); st.selfie=true; }; r.readAsDataURL(f);
+  });
+
+  function openPack(){ if($("packBtn").disabled)return;
+    $("pack").style.display="none"; $("stadium").classList.add("on");
+    // walk-out vidéo uniquement pour KeshMatch (le seul avec sa cinématique), sinon carte directe
+    if(st.app==="KeshMatch" && !reduced){
+      var cin=$("cinema"), v=$("walkoutVid"); cin.classList.add("on");
+      var go=function(){ cin.classList.remove("on"); try{v.pause();}catch(e){} showCard(); };
+      v.currentTime=0; var p=v.play(); if(p&&p.catch)p.catch(function(){ go(); });
+      v.onended=go; $("skipBtn").onclick=go;
+    } else { showCard(); }
+  }
+  function showCard(){ $("cardScene").classList.add("on"); st.revealed=true; drawCard();
+    $("cardScene").scrollIntoView({behavior:"smooth",block:"center"}); }
+  $("packBtn").addEventListener("click",openPack); $("packVisual").addEventListener("click",openPack);
+
+  var card=$("card");
+  document.addEventListener("mousemove",function(e){ if(!st.revealed||reduced)return; var r=card.getBoundingClientRect();
+    var x=(e.clientX-r.left-r.width/2)/(r.width/2), y=(e.clientY-r.top-r.height/2)/(r.height/2);
+    if(Math.abs(x)<2&&Math.abs(y)<2) card.style.transform="rotateY("+(x*6)+"deg) rotateX("+(-y*6)+"deg)"; });
+
+  var reEmail=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  function checkReserve(){ $("reserve").disabled=!(st.pseudo.trim().length>=2 && st.app && reEmail.test($("email").value.trim()) && $("consent").checked); }
+  $("email").addEventListener("input",checkReserve); $("consent").addEventListener("change",checkReserve);
+  $("reserve").addEventListener("click",function(){ if($("reserve").disabled)return;
+    if(!st.revealed) openPack();
+    $("formwrap").classList.add("hide"); $("successBox").classList.add("on");
+    var url="https://keshentreprise.com", txt="Je suis Membre Fondateur de KESH ⚡ ("+st.app+"). Réserve ta carte 👉 ";
+    $("sh-wa").href="https://wa.me/?text="+encodeURIComponent(txt+url);
+    $("sh-x").href="https://twitter.com/intent/tweet?text="+encodeURIComponent(txt)+"&url="+encodeURIComponent(url);
+    $("successBox").scrollIntoView({behavior:"smooth",block:"center"}); });
+  $("sh-cp").addEventListener("click",function(){ if(navigator.clipboard) navigator.clipboard.writeText("https://keshentreprise.com").then(function(){ $("sh-cp").textContent="Copié ✓"; }); });
+
+  $("assistX").addEventListener("click",function(){ $("assistBulle").classList.add("hide"); });
+  $("assistAv").addEventListener("click",function(){ $("assistBulle").classList.toggle("hide"); });
+
+  function runTuto(){ $("tuto").classList.add("on");
+    var target=94, tiers=[[65,"Bronze","#CD7F32"],[75,"Argent","#C0C7D0"],[85,"Or","#E8C15A"]];
+    $("tFill").style.width="0"; $("tNote").textContent="65"; $("tTier").textContent="Bronze"; $("tTier").style.color="#CD7F32";
+    if(reduced){ $("tNote").textContent=target; $("tTier").textContent="Or"; $("tTier").style.color="#E8C15A"; $("tFill").style.width="100%"; return; }
+    var t0=null; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/2600), val=Math.round(65+(target-65)*p);
+      $("tNote").textContent=val; $("tFill").style.width=(p*100)+"%";
+      var tier=tiers[0]; for(var i=0;i<tiers.length;i++){ if(val>=tiers[i][0]) tier=tiers[i]; }
+      $("tTier").textContent=tier[1]; $("tTier").style.color=tier[2]; if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step); }
+  $("howBtn").addEventListener("click",runTuto); $("tClose").addEventListener("click",function(){ $("tuto").classList.remove("on"); });
+
+  drawCard(); checkPack();
+})();
+</script>
+</body>
+</html>
