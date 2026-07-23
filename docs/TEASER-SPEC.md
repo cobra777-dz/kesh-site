@@ -85,9 +85,10 @@ Flux de la page (haut → bas) :
 
 ---
 
-## 7. Conformité (Algérie + France)
+## 7. Conformité (Royaume‑Uni + France/UE + Algérie)
 
-- **RGPD (FR/UE) + loi 18‑07 (DZ)** : pages **Mentions légales** + **Politique de confidentialité**, **mini‑mention + case de consentement** sous le champ email, **minimisation** (email + source ; on arrête `user_agent`/`referrer`). Preuve de consentement horodatée.
+> **Entité = société UK en cours de constitution à Londres (~fin juillet 2026, Cobra 23/07).** → **UK GDPR (régulateur ICO)** + **RGPD (CNIL) pour les visiteurs FR/UE** + **loi 18‑07 (ANPDP) pour l'Algérie**. Un **représentant UE (RGPD art. 27)** est peut‑être requis (société hors UE ciblant l'UE) → à confirmer avec l'avocat.
+- Pages **Mentions légales** + **Politique de confidentialité** = LIVRÉES (placeholders identité tant que la société n'existe pas) · **mini‑mention + case de consentement** sous le champ email · **minimisation** (email + source ; on arrête `user_agent`/`referrer`). Preuve de consentement horodatée. Selfie = **client‑side only**.
 - **Compteur INTOUCHÉ** (rappel) — le risque « pratique trompeuse » sur le compteur reste porté par Cobra en connaissance de cause.
 
 ---
