@@ -14,10 +14,15 @@
 2. **Charte carte** — `kesh/docs/DESIGN.md §4` + maquette `kesh/docs/design-reference/keshmatch/keshmatch-v3-stade.html` (RÉUTILISÉE, pas réinventée).
 3. **Générer images/vidéos** (avatars façon FIFA, walk-outs) — via **VERTEX** (crédit 262 €), **PAS** nano-banana / AI Studio (bloqué 429). Recette exacte : mémoire `kesh-vertex-image-gen`.
 
+## Fait (23/07, nuit)
+- ✅ **Bouton hero** « Réserve ta carte de Fondateur » → `/carte.html` (D1)
+- ✅ **RGPD form** : case de consentement + minimisation (email+source seuls)
+- ✅ **Vidéo hero** 2,29 Mo → 337 Ko · ✅ **Polices auto-hébergées** (0 Google Fonts, D4)
+
 ## Reste à faire
-- Générer les **7 autres avatars** (H/F × gaming/course/muscu) + leurs **walk-outs** (Veo).
-- **Intégrer** la présentation au teaser principal (aujourd'hui page séparée `carte.html`).
-- Manche 3 : self-host polices · alléger/optimiser la vidéo · **Cloudflare** (en-têtes sécurité) · **Plausible** (analytics).
+- **D2 — comptes Cobra** : créer **Cloudflare** (en-têtes sécu) + **Plausible/analytics** en suivant `docs/OPS-COMPTES.md`, puis me dire « prêt » → je câble le code (headers + events) en 5 min.
+- Générer les **7 autres avatars** (H/F × gaming/course/muscu) + leurs **walk-outs** (Veo) — **quand tu valides** (coûte du crédit).
+- **Fusionner** la carte dans le teaser principal (aujourd'hui bouton → page séparée `carte.html`).
 - **RGPD** : remplir les `[À COMPLÉTER]` des pages légales dès l'immatriculation de la société UK.
 
 ## Règles
