@@ -1,6 +1,6 @@
 # KESH — Teaser & Système de Carte · BRIEF / SPEC
 
-> **Statut :** design validé dans les grandes lignes, build pas encore commencé · **Date :** 2026‑07‑23 · **Auteur :** Cobra + Claude
+> **Statut :** ✅ **DIRECTION CARTE VALIDÉE par Cobra (23/07) — présentation LIVE sur `keshentreprise.com/carte.html`. TOUTE session / tout dev se base dessus.** · **Date :** 2026‑07‑23 · **Auteur :** Cobra + Claude
 > **Ce fichier existe pour qu'une autre session reprenne le sujet sans rien perdre.** On grave (doctrine « livrables durables »).
 
 ---
