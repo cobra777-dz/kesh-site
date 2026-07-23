@@ -62,7 +62,15 @@ Flux de la page (haut → bas) :
 2. **Section « KeshSport arrive »** (rouge/noir) — les **4 apps** en tuiles élégantes : icône + nom + 1 ligne + « bientôt en test ». L'univers est clair.
 3. **Le hook — « Réserve ta carte »** : le visiteur entre son **pseudo** (+ **choisit son terrain** : Match/Play/Footing/Gym → segmente les futurs testeurs) → **sa carte se génère** avec un mini‑**walkout** sur fond **fumigène rouge** (asset vidéo existant) → **email = réserver la carte** → écran **« partage TA carte »** (boucle virale : chaque carte partagée = une pub).
 
-**⚠️ Décision de Cobra : CHAQUE app a SA carte (design distinct).** Le teaser mène avec la carte **KeshMatch** (phare) ; les 4 designs distincts sont un **système KeshSport** à spécifier (voir §9, décision ouverte : 1 carte au départ vs 4 dès le teaser).
+**⚠️ Décision de Cobra : CHAQUE app a SA carte (design distinct).** Le teaser mène avec la carte **KeshMatch** (phare) ; les 4 designs distincts sont un **système KeshSport** à spécifier (voir §9).
+
+**Mécanique validée (proto M2, 23/07 — artifact `claude.ai/code/artifact/1cc47a86`) :**
+- Défaut = état **KeshSport** : fond « arène » rouge+or + dans la zone stats un prompt **« ⚽🎮🏃💪 choisis ton terrain »**.
+- Cliquer un terrain (Foot/Gaming/Course/Muscu) **switche carte + fond + stats** avec un flash de reveal. C'est le « mode où on sélectionne toutes les cartes » demandé par Cobra.
+- **Stats LOGIQUES par app** (plus de stats de foot en gaming) : Match `VIT TIR PAS DRI DÉF PHY` · Play `VIS RÉF STR VIT MEN CLU` · Footing `END VIT ALL DÉN RÉC MEN` · Gym `FRC EXP VOL END TEC MEN`.
+- **KeshMatch = San Siro DANS la carte** (comme la vraie carte FUT / le `.cp-stade` de l'app) → asset `kesh-site/assets/stade-sansiro.jpg` (v1 optimisée 36 Ko depuis `Kesh-Archive/00_Holding/stade-san-siro/`). Les 3 autres apps ont des fonds placeholder (vraies ambiances = polish après design des apps).
+- Selfie = FileReader **côté client**, posé sur l'avatar de la carte, jamais envoyé.
+- **Base faite. Polish après** (vraies ambiances Play/Footing/Gym + designs propres + avatars illustrés nano‑banana + walkout du reveal).
 
 ---
 
@@ -120,3 +128,11 @@ Flux de la page (haut → bas) :
 ## 10. Journal
 
 - **2026‑07‑23** — Audit complet du teaser (rapport : compteur ~99 % fabriqué, 0 RGPD/headers/analytics…). Direction actée : preview « Réserve ta carte » rouge KeshMatch + 4 apps. Corrections Cobra : KeshSalla→KeshGym, pas de slogan « Strava algérien », avatar stylé+photo. Brief gravé (ce fichier). Build à démarrer par Manche 1.
+
+
+---
+
+## 11. ⭐ L'ASSISTANT « KESH que tu veux ? » + tutoriel note dynamique animé (Cobra 23/07 — GRAVÉ, NE PAS PERDRE)
+
+- **Assistant site-wide « KESH que tu veux ? » (#KESHQUETUVEUX)** : sur tout le site / l'app, un assistant-guide qui accompagne et explique. Signature = le jeu de mots **« KESH que tu veux ? »** (= « qu'est-ce que tu veux ? »). Catchphrase + hashtag de marque. Ton fun, complice. C'est le fil d'aide (onboarding/tuto/guidage) ET une signature verbale de la marque.
+- **Tutoriel note dynamique EN ANIMATION** : « **plus tu joues, plus ta note monte** » — et on le **MONTRE en animation** (la note qui grimpe depuis 65, la carte bronze qui s'illumine, les stats qui montent). Pédagogie par le mouvement. Ancré sur **LOI 2** (les stats se gagnent). À intégrer dans le tuto de la carte KeshMatch du teaser, puis partout dans le produit.
