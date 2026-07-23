@@ -98,15 +98,6 @@
   .wl-consent input{margin-top:2px;width:15px;height:15px;flex:none;accent-color:#f5b53c}
   .wl-consent a{color:#ffe7a6}
   .join.done .wl-consent{display:none}
-  .carte-cta{display:inline-flex;flex-direction:column;align-items:center;gap:1px;margin:.1rem auto .4rem;padding:.8rem 1.6rem;border-radius:14px;text-decoration:none;color:#231a05;
-    background:linear-gradient(180deg,#ffe7a6,#f5b53c 55%,#d9971f);box-shadow:0 10px 30px rgba(245,181,60,.42),inset 0 0 0 1px rgba(255,231,166,.5);
-    transition:transform .15s ease,box-shadow .2s;animation:ctaPulse 2.4s ease-in-out infinite}
-  .carte-cta .t{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(.98rem,2.6vw,1.14rem)}
-  .carte-cta .t b{font-weight:700}
-  .carte-cta .u{font-family:"Manrope",sans-serif;font-weight:600;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;opacity:.72}
-  .carte-cta:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(245,181,60,.6)}
-  @keyframes ctaPulse{0%,100%{box-shadow:0 10px 30px rgba(245,181,60,.42),inset 0 0 0 1px rgba(255,231,166,.5)}50%{box-shadow:0 12px 46px rgba(245,181,60,.72),inset 0 0 0 1px rgba(255,231,166,.7)}}
-  @media (prefers-reduced-motion:reduce){.carte-cta{animation:none}}
   .join.done .join-form{display:none}
   .join.done .join-sub{display:none}
   .join-count{font-size:clamp(.72rem,1.6vw,.85rem);color:#cdd5e2;text-shadow:0 1px 8px rgba(0,0,0,.6)}
@@ -197,7 +188,6 @@
         <p class="join-label">Rejoignez le mouvement</p>
         <p class="join-count">⚡ Déjà <span id="wlcount">1&nbsp;240</span> dans le mouvement <span class="lim">· Places limitées</span></p>
         <p class="join-sub">La beta, en avant-première — avant tout le monde.</p>
-        <a class="carte-cta" href="/carte.html"><span class="t">🏟️ Réserve ta <b>carte de Fondateur</b> →</span><span class="u">Walk-out · San Siro · numérotée</span></a>
         <form class="join-form" id="wlform" novalidate>
           <input class="join-input" id="wlemail" type="email" name="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="Votre email" aria-label="Votre email" required>
           <button class="join-btn" id="wlbtn" type="submit">Rejoindre</button>
