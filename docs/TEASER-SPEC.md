@@ -136,3 +136,32 @@ Flux de la page (haut → bas) :
 
 - **Assistant site-wide « KESH que tu veux ? » (#KESHQUETUVEUX)** : sur tout le site / l'app, un assistant-guide qui accompagne et explique. Signature = le jeu de mots **« KESH que tu veux ? »** (= « qu'est-ce que tu veux ? »). Catchphrase + hashtag de marque. Ton fun, complice. C'est le fil d'aide (onboarding/tuto/guidage) ET une signature verbale de la marque.
 - **Tutoriel note dynamique EN ANIMATION** : « **plus tu joues, plus ta note monte** » — et on le **MONTRE en animation** (la note qui grimpe depuis 65, la carte bronze qui s'illumine, les stats qui montent). Pédagogie par le mouvement. Ancré sur **LOI 2** (les stats se gagnent). À intégrer dans le tuto de la carte KeshMatch du teaser, puis partout dans le produit.
+
+
+---
+
+## 12. 🔁 RÉUTILISABLE PAR DÉFAUT (règle Cobra 23/07 — s'applique à TOUT)
+
+Tout ce qu'on build = **composant réutilisable / partagé par défaut**, jamais un one-shot jetable. La **carte** = UNE source (idéalement un **web component `<kesh-card>`** qui marche en HTML statique ET en React → teaser + app `apps/sport/app/CartePack.tsx` + cartes marketing). Idem **assistant**, **gate** (gabarit), **avatars**, **tokens** (`packages/foundation`). Avant de coder : « d'où je le réutilise, qui d'autre le réutilisera ? ». Candidat règle DOCTRINE (repo kesh). Voir mémoire `kesh-reutilisable-par-defaut`.
+
+
+---
+
+## 13. ✅ VERDICTS DU GROS GATE (Cobra, 23/07 — DIRECTION FIGÉE)
+
+- **D1 Périmètre** = Base solide d'abord (KeshMatch complète + 3 apps en teasers d'identité).
+- **D2 Carte** = la **VRAIE carte de l'app** (`apps/sport/app/CartePack.tsx` + San Siro `.cp-stade`) — réutilisée, pas réinventée.
+- **D3 Note** = **Bronze ~65 qui grimpe** (LOI 2).
+- **D4 San Siro** = **les deux** (dans la carte + ambiance de scène).
+- **D5 Switcher** = KeshMatch complet + 3 teasers (pas de fausses stats).
+- **D6 Tuto** = bouton **« comment ça marche ? »** sur la carte → animation.
+- **D7 L'anim montre** : note qui grimpe · Bronze→Argent→Or · stats qui montent · vote des adversaires · décroissance si inactif (PAS le défi filmé >85 pour le teaser).
+- **D8 Assistant** = guide flottant discret « KESH que tu veux ? ».
+- **D9 Forme assistant** = bulle texte fun ⚡ **+ petite mascotte** (Cobra aime 1 ET 2 → combiner).
+- **D10 Avatars** = **8** (H/F × 4 sports), nano-banana.
+- **D11 Flux** = la **carte DEVIENT l'inscription** (pseudo → terrain → selfie → carte → email).
+- **D12 Build** = solo + council review, direct main.
+- **D13 Réutilisation** (ajouté après, non tranché) → reco **web component `<kesh-card>`** (marche HTML + React), à confirmer.
+
+### ⭐ MÉCANIQUE FONDATEUR / PARRAINAGE (D3 note — GRAVÉ, applicable aux 4 MVP)
+Si un joueur **parraine > 10 personnes** (ou déclencheur type « un match » — seuil/trigger à préciser) → sa **carte passe en design « Fondateur »** (visuel premium distinct) **+ +10 de note d'un coup**, livré avec une **grosse animation** (« putain d'animation »). L'**assistant « KESH que tu veux ? »** ou une **notification push** le lui annonce. **Applicable aux 4 MVP** (Match/Play/Footing/Gym). Levier viral (parrainage) + statut/gamification.
