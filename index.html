@@ -96,6 +96,10 @@
   .join-msg{min-height:1.1em;font-size:.82rem;letter-spacing:.01em;color:#aeb6c6;transition:color .2s;text-shadow:0 1px 8px rgba(0,0,0,.6)}
   .join-msg.ok{color:var(--gold-hot)}
   .join-msg.err{color:#ff8a9c}
+  .wl-consent{display:flex;gap:8px;align-items:flex-start;max-width:34ch;margin:.15rem auto 0;font-size:.72rem;line-height:1.35;color:#aeb6c6;text-align:left;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  .wl-consent input{margin-top:2px;width:15px;height:15px;flex:none;accent-color:#f5b53c}
+  .wl-consent a{color:#ffe7a6}
+  .join.done .wl-consent{display:none}
   .join.done .join-form{display:none}
   .join.done .join-sub{display:none}
   .join-count{font-size:clamp(.72rem,1.6vw,.85rem);color:#cdd5e2;text-shadow:0 1px 8px rgba(0,0,0,.6)}
@@ -190,6 +194,7 @@
           <input class="join-input" id="wlemail" type="email" name="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="Votre email" aria-label="Votre email" required>
           <button class="join-btn" id="wlbtn" type="submit">Rejoindre</button>
         </form>
+        <label class="wl-consent"><input type="checkbox" id="wlconsent"><span>J'accepte de recevoir par e‑mail l'accès anticipé de KESH. Désinscription à tout moment. <a href="/confidentialite.html">Confidentialité</a>.</span></label>
         <p class="join-msg" id="wlmsg" role="status" aria-live="polite"></p>
       </section>
 
@@ -271,6 +276,7 @@
         if (sent) return;
         var email = (input.value || "").trim().toLowerCase();
         if (!reEmail.test(email) || email.length > 320){ say("Email invalide.", "err"); input.focus(); return; }
+        if (!document.getElementById("wlconsent").checked){ say("Coche la case pour continuer.", "err"); return; }
         btn.disabled = true; say("Un instant…", "");
         fetch(SB_URL + "/rest/v1/teaser_waitlist", {
           method: "POST",
@@ -280,11 +286,7 @@
             "Content-Type": "application/json",
             "Prefer": "return=minimal"
           },
-          body: JSON.stringify({
-            email: email, source: "teaser",
-            user_agent: (navigator.userAgent || "").slice(0, 300),
-            referrer: (document.referrer || "").slice(0, 300)
-          })
+          body: JSON.stringify({ email: email, source: "teaser" })
         }).then(function(r){
           if (r.ok || r.status === 409){
             sent = true; join.classList.add("done");
