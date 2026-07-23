@@ -105,11 +105,14 @@ Flux de la page (haut → bas) :
 **Tranché :**
 - ✅ Compteur intouché · ✅ Carte **rouge KeshMatch** · ✅ Preview « 4 tuiles + carte » · ✅ Ship direct sur `main` · ✅ Cible DZ+FR (RGPD s'applique) · ✅ `KeshSalla → KeshGym` · ✅ Interdit « le Strava algérien » (slogans originaux) · ✅ Avatar générique stylé puis photo.
 
-**À trancher (Cobra) :**
-- ❓ **Slogans des 4 apps** — valider/réécrire les candidats du §2.
-- ❓ **Teaser : 1 carte (KeshMatch) au départ, ou les 4 cartes distinctes dès maintenant ?** (impacte fortement la charge de Manche 2.)
-- ❓ **« Choisis ton terrain »** dans le flux d'inscription : oui/non.
-- ❓ Set d'avatars génériques : combien, quels styles/genres (à générer nano‑banana).
+**Tranché par carte de gate (Cobra, 23/07) :**
+- ✅ **Slogans** : KeshMatch « **Si tu joues, tu existes.** » · KeshPlay « **La manette devient une carrière.** » · KeshFooting « **Chaque foulée laisse une trace.** » · KeshGym « **La barre ne ment jamais.** »
+- ✅ **Teaser = 1 carte KeshMatch d'abord** (les 3 autres cartes distinctes suivent après).
+- ✅ **« Choisis ton terrain » = OUI** (segmente les testeurs) **+ étape « upload ton selfie pour ton avatar »** dans le flux.
+- ✅ **Avatars = illustré premium, par genre + sport** (set à générer nano‑banana : homme/femme × foot/gym/gaming/course).
+- ✅ **Selfie (teaser v1) = traité CÔTÉ CLIENT uniquement** (jamais envoyé/stocké → RGPD‑safe) ; le pipeline IA selfie→avatar = feature in‑app plus tard.
+
+**Reste ouvert (plus tard) :** nombre exact d'avatars du set · désigns des 3 autres cartes (Play/Footing/Gym).
 
 ---
 

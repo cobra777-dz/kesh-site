@@ -7,7 +7,7 @@
 <meta name="description" content="Née à Alger. Le reste se dévoile bientôt. Rejoignez le mouvement — avant tout le monde. Lancement : 01.11.2026.">
 <meta property="og:site_name" content="KESH">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://keshentreprise.com">
+<meta property="og:url" content="https://keshentreprise.com/">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="KESH — Une identité. Tout un monde.">
 <meta property="og:description" content="Née à Alger. Le reste se dévoile bientôt. Rejoignez le mouvement — avant tout le monde. 01.11.2026.">
@@ -22,6 +22,9 @@
 <meta name="twitter:description" content="Née à Alger. Le reste se dévoile bientôt. Rejoignez le mouvement — avant tout le monde. 01.11.2026.">
 <meta name="twitter:image" content="https://keshentreprise.com/assets/og-image.jpg?v=2">
 <meta name="theme-color" content="#070b14">
+<link rel="canonical" href="https://keshentreprise.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.svg" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,7 +54,7 @@
     z-index:0;opacity:0;transition:opacity 1.2s ease}
   .hero-video.playing{opacity:1}
   .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg, rgba(7,11,20,.78) 0%, rgba(7,11,20,.34) 40%, rgba(7,11,20,.46) 70%, rgba(7,11,20,.92) 100%),radial-gradient(120% 85% at 50% 38%, transparent 42%, rgba(7,11,20,.55) 100%)}
+    background:linear-gradient(180deg, rgba(7,11,20,.82) 0%, rgba(7,11,20,.5) 40%, rgba(7,11,20,.6) 70%, rgba(7,11,20,.94) 100%),radial-gradient(120% 85% at 50% 38%, rgba(7,11,20,.18) 30%, rgba(7,11,20,.72) 100%)}
 
   .content{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(1.05rem,2.6vw,1.7rem);width:100%}
   .signature{font-size:clamp(.6rem,1.5vw,.72rem);letter-spacing:.36em;text-transform:uppercase;color:var(--cyan);padding-left:.36em;font-weight:600;text-shadow:0 1px 12px rgba(0,0,0,.7)}
@@ -70,7 +73,7 @@
   .cd-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(.5rem,2.4vw,1rem)}
   .cd-cell{display:flex;flex-direction:column;align-items:center;gap:.4rem;min-width:clamp(60px,15vw,94px);padding:clamp(.6rem,1.6vw,.85rem) clamp(.5rem,1.5vw,.85rem);border:1px solid rgba(255,255,255,.14);border-radius:13px;background:rgba(7,11,20,.42);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
   .num{font-family:"Fraunces",serif;font-size:clamp(1.8rem,6.5vw,3rem);font-weight:700;line-height:1;font-variant-numeric:tabular-nums;color:#fff}
-  .unit{font-size:clamp(.52rem,1.3vw,.62rem);letter-spacing:.2em;text-transform:uppercase;color:#aeb6c6}
+  .unit{font-size:clamp(.66rem,1.6vw,.74rem);letter-spacing:.2em;text-transform:uppercase;color:#c6cedb}
 
   /* Waitlist beta : « rejoignez le mouvement » (exclusivité), email → Supabase. */
   .join{display:flex;flex-direction:column;align-items:center;gap:clamp(.4rem,1.3vw,.6rem);margin-top:.7rem;width:100%}
@@ -133,10 +136,25 @@
     .join{animation-delay:1.08s}
     .foot{animation-delay:1.25s}
   }
+  @media (prefers-reduced-motion:reduce){
+    .hero-kb{animation:none!important}
+    .hero-video{display:none!important}
+    .content > *{opacity:1!important;animation:none!important}
+  }
+  :focus-visible{outline:2px solid #ffe7a6;outline-offset:2px;border-radius:8px}
+  .foot .legal{margin-top:7px}
+  .foot .legal a{color:#8791a3;font-size:.72rem;text-decoration:none;letter-spacing:.02em}
+  .foot .legal a:hover{color:#ffe7a6}
 </style>
 <noscript><style>
   .content > *{opacity:1!important;animation:none!important}
 </style></noscript>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://keshentreprise.com/#org","name":"KESH Entreprise","alternateName":"KESH","url":"https://keshentreprise.com/","logo":"https://keshentreprise.com/favicon.svg","slogan":"Une identité. Tout un monde.","foundingLocation":{"@type":"Place","name":"Alger, Algérie"}},
+{"@type":"WebSite","@id":"https://keshentreprise.com/#site","url":"https://keshentreprise.com/","name":"KESH Entreprise","inLanguage":"fr-FR","publisher":{"@id":"https://keshentreprise.com/#org"}}
+]}
+</script>
 </head>
 <body>
   <div class="hero">
@@ -145,7 +163,7 @@
     <div class="hero-scrim" aria-hidden="true"></div>
 
     <div class="content">
-      <p class="signature">Organize. Analyze. Perform.</p>
+      <p class="signature" lang="en">Organize. Analyze. Perform.</p>
       <div class="stage">
         <h1 class="wordmark" aria-label="KESH"><span>K</span><span>E</span><span class="s-gold">S</span><span>H</span></h1>
         <div class="lockrule"></div>
@@ -175,7 +193,9 @@
         <p class="join-msg" id="wlmsg" role="status" aria-live="polite"></p>
       </section>
 
-      <div class="foot"><span class="site">keshentreprise.com</span></div>
+      <div class="foot"><span class="site">keshentreprise.com</span>
+        <nav class="legal" aria-label="Informations légales"><a href="/mentions-legales.html">Mentions légales</a> · <a href="/confidentialite.html">Confidentialité</a></nav>
+      </div>
     </div>
   </div>
 
@@ -212,7 +232,9 @@
     /* ————— Vidéo : fondu quand elle démarre. Sur mobile sans autoplay, la couche image
        Ken Burns dessous prend le relais et bouge quand même. ————— */
     var vid = document.getElementById("herovid");
-    if (vid){
+    var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (vid && reduceMotion){ vid.removeAttribute("autoplay"); try { vid.pause(); } catch(e){} }
+    else if (vid){
       vid.addEventListener("playing", function(){ vid.classList.add("playing"); });
       var kick = function(){ var p = vid.play(); if (p && p.catch) p.catch(function(){}); };
       vid.addEventListener("canplay", kick); kick();
