@@ -1,0 +1,23 @@
+name = "kesh-avatar-worker"
+main = "src/index.js"
+compatibility_date = "2026-07-24"
+
+# Route : le Worker n'intercepte QUE ce chemin. Le reste du site continue
+# de servir depuis GitHub Pages (proxé par Cloudflare) — pas de migration
+# d'hébergement, juste un point d'API en plus.
+routes = [
+  { pattern = "keshentreprise.com/api/generate-avatar", zone_name = "keshentreprise.com" }
+]
+
+kv_namespaces = [
+  { binding = "RATE_LIMIT", id = "REMPLACER_PAR_L_ID_DU_NAMESPACE_KV" }
+]
+
+[vars]
+GCP_PROJECT_ID = "stellar-access-502813-m9"
+GCP_LOCATION = "global"
+VERTEX_MODEL = "gemini-3.1-flash-image"
+
+# Secret (JAMAIS dans ce fichier) — posé via le dashboard Cloudflare ou :
+#   wrangler secret put GCP_SA_KEY
+# GCP_SA_KEY = contenu JSON complet de la clé du service account

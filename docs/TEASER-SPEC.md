@@ -1,6 +1,6 @@
 # KESH — Teaser & Système de Carte · BRIEF / SPEC
 
-> **Statut :** ✅ **DIRECTION CARTE VALIDÉE par Cobra (23/07) — présentation LIVE sur `keshentreprise.com/carte.html`. TOUTE session / tout dev se base dessus.** · **Date :** 2026‑07‑23 · **Auteur :** Cobra + Claude
+> **Statut :** ✅ **DIRECTION CARTE VALIDÉE par Cobra (23/07)** — `carte.html` existe et est à jour dans le repo, mais **DÉLIÉ du teaser public** depuis le 24/07 (Cobra : « je déploierai tout ça une fois que ce sera prêt, il y a encore beaucoup de boulot »). Accessible en direct (`noindex`, non lié depuis `index.html`) pour continuer à builder. **TOUTE session / tout dev se base dessus**, mais **ne pas relier au hero sans instruction explicite de Cobra**. · **Dernière MàJ :** 2026‑07‑24 · **Auteur :** Cobra + Claude
 > **Ce fichier existe pour qu'une autre session reprenne le sujet sans rien perdre.** On grave (doctrine « livrables durables »).
 
 ---
@@ -119,15 +119,17 @@ Flux de la page (haut → bas) :
 - ✅ **Teaser = 1 carte KeshMatch d'abord** (les 3 autres cartes distinctes suivent après).
 - ✅ **« Choisis ton terrain » = OUI** (segmente les testeurs) **+ étape « upload ton selfie pour ton avatar »** dans le flux.
 - ✅ **Avatars = illustré premium, par genre + sport** (set à générer nano‑banana : homme/femme × foot/gym/gaming/course).
-- ✅ **Selfie (teaser v1) = traité CÔTÉ CLIENT uniquement** (jamais envoyé/stocké → RGPD‑safe) ; le pipeline IA selfie→avatar = feature in‑app plus tard.
+- ⚠️ **Selfie (teaser v1) = traité côté client uniquement** — **SUPERSEDÉ le 24/07** par la gate « Avatar de la carte » : voir §14, on part sur la vraie génération IA depuis la photo.
 
-**Reste ouvert (plus tard) :** nombre exact d'avatars du set · désigns des 3 autres cartes (Play/Footing/Gym).
+**Reste ouvert (plus tard) :** désigns des 3 autres cartes (Play/Footing/Gym) — teasers d'identité seulement pour l'instant (D3 du 23/07).
 
 ---
 
 ## 10. Journal
 
 - **2026‑07‑23** — Audit complet du teaser (rapport : compteur ~99 % fabriqué, 0 RGPD/headers/analytics…). Direction actée : preview « Réserve ta carte » rouge KeshMatch + 4 apps. Corrections Cobra : KeshSalla→KeshGym, pas de slogan « Strava algérien », avatar stylé+photo. Brief gravé (ce fichier). Build à démarrer par Manche 1.
+- **2026‑07‑24 (matin)** — Cobra : retire le bouton carte du hero, pas encore prêt à déployer publiquement (`022a302` revert). `carte.html` reste accessible en direct pour continuer à builder.
+- **2026‑07‑24** — Cobra teste l'avatar avec 2 potes : constate qu'il ne vient pas de sa photo. Gate « Avatar de la carte » → D1 vraie génération IA depuis la photo, D2 les 8 styles d'un coup. Worker Cloudflare + JWT service-account + 8 prompts + flux carte.html + RGPD réécrit, tout construit et testé (voir §14). Bloqué sur la création du service account GCP par Cobra (`docs/OPS-VERTEX-BACKEND.md`).
 
 
 ---
@@ -165,3 +167,22 @@ Tout ce qu'on build = **composant réutilisable / partagé par défaut**, jamais
 
 ### ⭐ MÉCANIQUE FONDATEUR / PARRAINAGE (D3 note — GRAVÉ, applicable aux 4 MVP)
 Si un joueur **parraine > 10 personnes** (ou déclencheur type « un match » — seuil/trigger à préciser) → sa **carte passe en design « Fondateur »** (visuel premium distinct) **+ +10 de note d'un coup**, livré avec une **grosse animation** (« putain d'animation »). L'**assistant « KESH que tu veux ? »** ou une **notification push** le lui annonce. **Applicable aux 4 MVP** (Match/Play/Footing/Gym). Levier viral (parrainage) + statut/gamification.
+
+---
+
+## 14. ✅ M4 — Avatar généré par IA depuis la vraie photo (Cobra 24/07 — gate « Avatar de la carte »)
+
+**Constat qui a déclenché la gate** : le visuel de la carte (joueur au San Siro) était une image générique, générée une seule fois, identique pour tout le monde — la photo uploadée ne servait qu'à un petit badge rond, jamais à générer quoi que ce soit. Testé par Cobra + 2 potes, remonté comme incompréhensible sans explication.
+
+**Verdicts (24/07) :**
+- **D1** = **Vraie génération IA à partir de la photo** (pas le set générique stylé qui était recommandé — Cobra a tranché plus ambitieux).
+- **D2** = **Les 8 d'un coup** (4 sports × H/F, styles tous prêts dès le départ, pas de rollout séquentiel).
+
+**Construit dans la foulée (24/07, code prêt, pas encore déployé) :**
+- `workers/generate-avatar/` — **Worker Cloudflare** autonome (1 fichier collable dans le dashboard) : reçoit photo+app+genre, s'authentifie auprès de Vertex AI via un **service account GCP** (JWT RS256 signé en Web Crypto — logique testée et vérifiée en local), appelle Gemini 3.1 Flash Image avec la photo en référence + prompt de style, renvoie l'avatar généré. Rate-limit KV (6/h/IP, 150/jour global) pour protéger le crédit Vertex. **La photo n'est jamais stockée**, seulement des compteurs anonymes.
+- **8 prompts de style** (un par app × genre) inline dans le Worker, même charte que l'avatar KeshMatch Homme déjà généré.
+- `carte.html` : sélecteur Homme/Femme, case de consentement **dédiée** à l'usage de la photo (séparée du consentement e‑mail), bouton « ✨ Générer mon avatar », état de chargement sur la carte, et **repli propre** sur l'avatar générique si la génération échoue (rien ne casse). Testé de bout en bout (navigateur mobile + réseau simulé).
+- `confidentialite.html` réécrit : la promesse « jamais envoyée » ne s'applique plus qu'en l'absence de génération ; section dédiée qui explique le sous-traitant (Google Cloud/Vertex AI), l'absence de stockage, la base légale (consentement dédié).
+- `docs/OPS-VERTEX-BACKEND.md` — guide clics-only pour Cobra : créer le service account GCP + sa clé, poser le Worker + ses secrets/bindings dans Cloudflare (réutilise le même compte Cloudflare que `OPS-COMPTES.md`).
+
+**Bloqué sur** : la session `gcloud` locale a expiré (réauth interactive requise, impossible en non-interactif) — impossible de provisionner le service account à la place de Cobra. **Attend Cobra** : suivre `docs/OPS-VERTEX-BACKEND.md` (service account + Worker + secret + route + KV), puis dire « c'est prêt ».
